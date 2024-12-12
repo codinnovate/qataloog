@@ -8,7 +8,7 @@ export default function Logo(){
             <Image
              alt="Qataloog logo"
              src={QataloogLogo}
-             className="object-cover w-full h-full"
+             className="object-cover w-full h-full max-w-[210px] max-h-[48px]"
              />
         </Link>
     )

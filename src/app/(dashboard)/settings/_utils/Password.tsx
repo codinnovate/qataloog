@@ -33,7 +33,7 @@ export default function Password() {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 max-w-[432px]">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 max-w-[432px] w-[432px]">
         <CustomFormField
         control={form.control}
         type={FormFieldType.INPUT}

@@ -15,7 +15,9 @@ export default {
   			},
 			'grey':{
 			DEFAULT:'#D0D0D4',
-			'100':"#7D7D80"
+			'100':"#7D7D80",
+			'200':'#323233'
+			
 			},
   			"secondary": {
   			DEFAULT: '#F14119',

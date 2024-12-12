@@ -24,7 +24,7 @@ export default  function Settings() {
   <div className="flex flex-col gap-12 w-full">
   <TopHeader title="Settings" />
   <div className="flex flex-col gap-12 ">
-    <div className="flex justify-between w-full">
+    <div className="flex flex-col  md:flex-row justify-center md:justify-between w-full">
     <TabsList
     tabs={[
       { id: 0, label: "Profile" },
@@ -34,7 +34,11 @@ export default  function Settings() {
       handleTabChange={handleTabChange}
       currentTab={currentTab}
       />
-      {currentTab === 3 && <SearchBar />}
+      {currentTab === 3 && 
+      <div className="flex justify-center mt-5 md:mt-0">
+      <SearchBar />
+      </div>
+      }
       </div>
     {/* tabs Headers */}
     <Tabs className='mb-[4em] '>

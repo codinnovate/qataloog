@@ -9,7 +9,7 @@ export default function LangSelect({className}:{className?:string}){
     const [selected, setSelected] = useState("NG");
 
     return (
-        <div>
+        <div className={className}>
             <ReactFlagsSelect
             className={className}
             onSelect={code => setSelected(code)}

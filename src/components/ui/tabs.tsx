@@ -55,7 +55,7 @@ function Tabs({children, className}:{children:React.ReactNode, className}){
 
 function TabsContent({currentTab, id, children}:{currentTab:number, id:number, children:React.ReactNode}){
   return (
-    <div className="">
+    <div className="flex justify-center md:justify-start w-full">
       {currentTab === id && children }
     </div>
   )

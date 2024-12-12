@@ -18,7 +18,7 @@ export default function Avatar({icon, userName}:AvatarProps){
         />
         <span className="ring-2 ring-white w-3 h-3 bg-success-500 rounded-full absolute bottom-0 right-0"/>
         </div>
-        <h2 className='font-semibold text-black'>{userName}</h2>
+        <h2 className='hidden md:block font-semibold text-black'>{userName}</h2>
         </div>
     )
 }

@@ -28,8 +28,8 @@ export default function DashboardLayout({
       >
         <Header />
         <main className="flex bg-[#fcfcff]">
-          <Sidebar />
-          <div className="flex  px-12 w-full">
+          <Sidebar className='hidden md:flex' />
+          <div className="flex  px-2 md:px-10 w-full">
             {children}
           </div>
         </main>
