@@ -13,12 +13,9 @@ import {
 	E164Number,
 } from 'libphonenumber-js/core';
 
-interface Field {
-    value: string;
-    onChange?: Function;
-}
 
-const RenderField = ({ props, field }: {field:Field, props: CustomProps }) => {
+
+const RenderField = ({ props, field }:{field:any, props: CustomProps }) => {
   const { type, placeholder, inputType } = props;
   const [togglePassword, setTogglePassword] = useState(false);
   const handleToggle = () => {
@@ -65,7 +62,7 @@ const RenderField = ({ props, field }: {field:Field, props: CustomProps }) => {
                       withCountryCallingCode
                       country="NG"
                       defaultCountry="NG"
-                      value={field.value as E164Number}
+                      value={field.value as E164Number | undefined}
                       onChange={field.onChange}
                       className="input-style outline-none p-2"
                   />

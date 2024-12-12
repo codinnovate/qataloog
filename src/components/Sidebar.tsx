@@ -15,6 +15,7 @@ export default function Sidebar(){
             {sidebarItems.map((item, index) => (
                 <LinkItem 
                 key={index}
+                
                 {...item}
                 />
             ))}

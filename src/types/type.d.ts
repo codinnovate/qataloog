@@ -10,7 +10,7 @@ import { FormFieldType } from "@/app/(dashboard)/settings/_utils/Password";
 
 declare interface LinkItemsProps extends LinkProps {
     name: string;
-    icon?: StaticImageData | React.FC<SVGProps<SVGSVGElement>>; // Using React.FC instead of FunctionComponent
+    icon?: StaticImageData | React.FC<SVGProps<SVGSVGElement>> ; // Using React.FC instead of FunctionComponent
 }
 
 declare interface TableProps {
