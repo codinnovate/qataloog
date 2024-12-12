@@ -1,21 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&display=swap');
+
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+*{
+  font-family: "Lato", serif;
+  font-weight: 600;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+}
+@layer utilities{
+  .input-style{
+    @apply flex rounded-[24px]  border-[0.5px] bg-white border-[#D0D0D4]
+  }
+  .row-header {
+    @apply uppercase
   }
 }
+.PhoneInputInput {
+  outline: none;
+  background: transparent;
+  color: #7D7D80 !important;
+  
+}
 
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+.PhoneInputInput::placeholder {
+  color: #7D7D80 !important;
+}
+
+.PhoneInputCountryIconImg{
+  border-radius: 20px !important;
+  object-fit: cover;
+}
+
+.PhoneInputCountryIcon ,.PhoneInputCountryIcon--border{
+  border-radius: 24px !important;
+  border: none !important;
 }
