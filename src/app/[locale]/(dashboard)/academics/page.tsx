@@ -1,6 +1,6 @@
 import { TopHeader } from "@/components/TopHeader";
 
-export default function AcademicLevels() {
+export default function Academics() {
   return <TopHeader title="Academic Levels" />
 }
 
