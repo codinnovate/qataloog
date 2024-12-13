@@ -39,7 +39,7 @@ export const sidebarItems = [
     },
     {
       name: "Academic Levels",
-      href: "/academic-levels",
+      href: "/academics",
       icon: levelsIcon,
     },
     {
@@ -54,7 +54,7 @@ export const sidebarItems = [
     },
     {
       name: "Content Type",
-      href: "/content-type",
+      href: "/content",
       icon: contentIcon,
     },
     {
