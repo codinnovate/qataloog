@@ -1,7 +1,7 @@
 import QataloogLogo from '@/assets/logo.svg';
 import avatarIcon from '@/assets/avatar.jpeg';
 import dashIcon from '@/assets/icons/dashboardIcon.svg';
-import addIcon from './icons/AddIcon';
+import addIcon from '@/assets/icons/addIcon.svg';
 import adminIcon from '@/assets/icons/adminIcon.svg';
 import cancelIcon from '@/assets/icons/cancelIcon.svg';
 import cautionIcon from '@/assets/icons/cautionIcon.svg';
@@ -20,11 +20,13 @@ import logoutIcon from '@/assets/icons/logoutIcon.svg';
 import StrokeIcon from '@/assets/icons/strokeIcon.svg';
 import userProfileIcon from '@/assets/userProfileIcon.png'
 import updateIcon from '@/assets/icons/updateIcon.svg';
-
-
+import addCircle from '@/assets/icons/addCircle.svg';
+import minusCircle from '@/assets/icons/minusCircle.svg';
 
 export {
     QataloogLogo,
+    minusCircle,
+    addCircle,
     userProfileIcon,
     StrokeIcon,
     avatarIcon,

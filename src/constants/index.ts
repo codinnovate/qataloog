@@ -72,23 +72,40 @@ export const sidebarItems = [
 export const tableData: TableProps[] = [
 
     {
+      id:1,
       academic_level: "Primary School",
       rate: 600,
       date_created: "2024-03-10",
       date_updated: "2024-04-10",
     },
     {
+      id:2,
       academic_level: "Tertiary Education",
-      rate: 2000,
+      rate: 3000,
       date_created: "2024-03-13",
       date_updated: "2024-04-13",
     },
     
     {
+      id:3,
       academic_level: "High School",
-      rate: 1000,
+      rate: 4000,
       date_created: "2024-03-12",
       date_updated: "2024-04-12",
+    },
+    {
+      id:5,
+      academic_level: "Primary School",
+      rate: 600,
+      date_created: "2024-03-10",
+      date_updated: "2024-04-10",
+    },
+    {
+      id:7,
+      academic_level: "Tertiary Education",
+      rate: 2000,
+      date_created: "2024-03-13",
+      date_updated: "2024-04-13",
     },
   ];
 

@@ -14,6 +14,7 @@ declare interface LinkItemsProps extends LinkProps {
 }
 
 declare interface TableProps {
+    id:number;
     academic_level: string;
     rate: number;
     date_created: string;

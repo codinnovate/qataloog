@@ -16,7 +16,10 @@
     @apply flex rounded-[24px]  border-[0.5px] bg-white border-[#D0D0D4]
   }
   .row-header {
-    @apply uppercase
+    @apply uppercase text-base text-grey-200 font-bold
+  }
+  .table-text{
+    @apply text-base text-[#493452] font-semibold
   }
 }
 .PhoneInputInput {

@@ -13,10 +13,8 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import { ArrowUpDown, ChevronDown, MoreHorizontal } from "lucide-react"
-
-import { Button } from "@/components/ui/button"
-import { Checkbox } from "@/components/ui/checkbox"
+import { ArrowDown, ArrowUp} from "lucide-react"
+import Button from "./Button"
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -35,136 +33,82 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { tableData } from "@/constants"
+import { addCircle } from "@/assets"
+import LangSelect from "./LangSelect"
+import ActionBtn from "./ActionBtn"
 
-const data: Payment[] = [
-  {
-    id: "m5gr84i9",
-    amount: 316,
-    status: "success",
-    email: "ken99@yahoo.com",
-  },
-  {
-    id: "3u1reuv4",
-    amount: 242,
-    status: "success",
-    email: "Abe45@gmail.com",
-  },
-  {
-    id: "derv1ws0",
-    amount: 837,
-    status: "processing",
-    email: "Monserrat44@gmail.com",
-  },
-  {
-    id: "5kma53ae",
-    amount: 874,
-    status: "success",
-    email: "Silas22@gmail.com",
-  },
-  {
-    id: "bhqecj4p",
-    amount: 721,
-    status: "failed",
-    email: "carmella@hotmail.com",
-  },
-]
+declare interface TableProps {
+  id:number;
+  academic_level: string;
+  rate: number;
+  date_created: string;
+  date_updated: string;
+};
 
-export type Payment = {
-  id: string
-  amount: number
-  status: "pending" | "processing" | "success" | "failed"
-  email: string
-}
 
-export const columns: ColumnDef<Payment>[] = [
+export const columns: ColumnDef<TableProps>[] = [
   {
-    id: "select",
-    header: ({ table }) => (
-      <Checkbox
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
-    ),
+    accessorKey: "id",
+    header: ()=> <h2 className="row-header">S/N</h2>,
     cell: ({ row }) => (
-      <Checkbox
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
+      <div className="capitalize table-text">{row.getValue("id")}</div>
     ),
-    enableSorting: false,
-    enableHiding: false,
   },
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "academic_level",
+    header: ()=> <h2 className="row-header">Academic Levels</h2>,
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("status")}</div>
+      <div className="capitalize table-text">{row.getValue("academic_level")}</div>
     ),
   },
   {
-    accessorKey: "email",
+    accessorKey: "rate",
     header: ({ column }) => {
       return (
-        <Button
-          variant="ghost"
-          onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
+        <button
+         className="row-header flex"
+        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
         >
-          Email
-          <ArrowUpDown />
-        </Button>
+          Rate
+          {column.getIsSorted() === "asc" ? <ArrowDown /> : <ArrowUp />}
+        </button>
       )
     },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("email")}</div>,
+    cell: ({ row }) => <div className="table-text">{row.getValue("rate")}</div>,
   },
   {
-    accessorKey: "amount",
-    header: () => <div className="text-right">Amount</div>,
-    cell: ({ row }) => {
-      const amount = parseFloat(row.getValue("amount"))
-
-      // Format the amount as a dollar amount
-      const formatted = new Intl.NumberFormat("en-US", {
-        style: "currency",
-        currency: "USD",
-      }).format(amount)
-
-      return <div className="text-right font-medium">{formatted}</div>
-    },
+    accessorKey: "date_created",
+    header: ()=> <h2 className="row-header">Date Created</h2>,
+    cell: ({ row }) => (
+      <div className="capitalize table-text">{row.getValue("date_created")}</div>
+    ),
   },
   {
-    id: "actions",
-    enableHiding: false,
-    cell: ({ row }) => {
-      const payment = row.original
-
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="ghost" className="h-8 w-8 p-0">
-              <span className="sr-only">Open menu</span>
-              <MoreHorizontal />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            <DropdownMenuLabel>Actions</DropdownMenuLabel>
-            <DropdownMenuItem
-              onClick={() => navigator.clipboard.writeText(payment.id)}
-            >
-              Copy payment ID
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>View customer</DropdownMenuItem>
-            <DropdownMenuItem>View payment details</DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
-    },
+    accessorKey: "date_updated",
+    header: ()=> <h2 className="row-header">Date Updated</h2>,
+    cell: ({ row }) => (
+      <div className="capitalize table-text">{row.getValue("date_updated")}</div>
+    ),
   },
+ 
+  {
+    accessorKey: "actions",
+    header: "",
+    cell: () => (
+      <div className="flex">
+      <ActionBtn action="Edit" />
+      <ActionBtn action="Delete" />
+      </div>
+    ),
+  },
+  {
+    accessorKey: "langselect",
+    header: () => <LangSelect />,
+    
+  },
+  
+  
 ]
 
 export function SearchTable() {
@@ -178,7 +122,7 @@ export function SearchTable() {
   const [rowSelection, setRowSelection] = React.useState({})
 
   const table = useReactTable({
-    data,
+    data:tableData,
     columns,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
@@ -199,45 +143,21 @@ export function SearchTable() {
 
   return (
     <div className="w-full">
-      <div className="flex items-center py-4">
+      <div className="md:absolute  md:top-[38%] md:right-[10%]">
+      <div className="h-10 border border-grey rounded-full w-full md:max-w-[318px] lg:w-[318px]">
         <Input
-          placeholder="Filter emails..."
-          value={(table.getColumn("email")?.getFilterValue() as string) ?? ""}
+          placeholder="Search"
+          value={(table.getColumn("rate")?.getFilterValue() as string) ?? ""}
           onChange={(event) =>
-            table.getColumn("email")?.setFilterValue(event.target.value)
+            table.getColumn("rate")?.setFilterValue(event.target.value)
           }
           className="max-w-sm"
         />
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align="end">
-            {table
-              .getAllColumns()
-              .filter((column) => column.getCanHide())
-              .map((column) => {
-                return (
-                  <DropdownMenuCheckboxItem
-                    key={column.id}
-                    className="capitalize"
-                    checked={column.getIsVisible()}
-                    onCheckedChange={(value) =>
-                      column.toggleVisibility(!!value)
-                    }
-                  >
-                    {column.id}
-                  </DropdownMenuCheckboxItem>
-                )
-              })}
-          </DropdownMenuContent>
-        </DropdownMenu>
       </div>
-      <div className="rounded-md border">
+      </div>
+      <div>
         <Table>
-          <TableHeader>
+          <TableHeader className="bg-[#fefeff]  !rounded-2xl h-[72px]">
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => {
@@ -285,28 +205,43 @@ export function SearchTable() {
           </TableBody>
         </Table>
       </div>
-      <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
+      <div className="flex items-center justify-between mt-6 ">
+        <Button
+        icon ={addCircle}
+        >
+          Add Level Rate
+        </Button>
+        {/* <div className="flex-1 text-sm text-muted-foreground">
           {table.getFilteredSelectedRowModel().rows.length} of{" "}
           {table.getFilteredRowModel().rows.length} row(s) selected.
-        </div>
-        <div className="space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            Previous
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
+        </div> */}
+        <div className="h-12 w-[186px] p-2 justify-between flex items-center border-grey border-[0.5px] rounded-[8px]">
+          <input 
+          placeholder="10%"
+          defaultValue="10%"
+          className="border-grey border-[0.5px] w-[90px] h-[32px] outline-none rounded-[8px] text-grey-100 py-1 px-2"
+
+          />
+          <button
             onClick={() => table.nextPage()}
             disabled={!table.getCanNextPage()}
           >
-            Next
-          </Button>
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M12 8V16M16 12L8 12" stroke="#F14119" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            <path d="M22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22C17.5228 22 22 17.5228 22 12Z" stroke="#F14119" strokeWidth="1.5"/>
+            </svg>
+
+          </button>
+          <button
+            onClick={() => table.previousPage()}
+            disabled={!table.getCanPreviousPage()}
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+            fill="none" 
+            stroke="#F14119" strokeWidth="1.5" 
+            strokeLinecap="round" strokeLinejoin="round">
+              <circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
+          </button>
         </div>
       </div>
     </div>
