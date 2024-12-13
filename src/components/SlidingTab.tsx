@@ -55,8 +55,8 @@ export default function SlidingTab() {
           key={tab.id}
           style={{ width: tabWidth }}
           className={cn(
-            "text-base z-20 text-grey-100 font-semibold",
-            currentTab === tab.id && "text-secondary-600"
+            "text-[12.8px] leading-[16px] text-center z-20 text-grey-100 font-semibold",
+            currentTab === tab.id && "text-secondary"
           )}
           onClick={() => setCurrentTab(tab.id)}
         >

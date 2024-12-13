@@ -1,5 +1,3 @@
-"use client"
-
 import * as React from "react"
 import {
   ColumnDef,
@@ -13,198 +11,149 @@ import {
   getSortedRowModel,
   useReactTable,
 } from "@tanstack/react-table"
-import { ArrowDown, ArrowUp} from "lucide-react"
+import { ArrowDown, ArrowUp } from "lucide-react"
 import Button from "./Button"
-import {
-  DropdownMenu,
-  DropdownMenuCheckboxItem,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "@/components/ui/table"
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { tableData } from "@/constants"
 import { addCircle } from "@/assets"
-import LangSelect from "./LangSelect"
 import ActionBtn from "./ActionBtn"
 
 declare interface TableProps {
-  id:number;
+  id: number;
   academic_level: string;
   rate: number;
   date_created: string;
   date_updated: string;
 };
 
-
 export const columns: ColumnDef<TableProps>[] = [
   {
     accessorKey: "id",
-    header: ()=> <h2 className="row-header">S/N</h2>,
-    cell: ({ row }) => (
-      <div className="capitalize table-text">{row.getValue("id")}</div>
-    ),
+    header: () => <h2 className="row-header">S/N</h2>,
+    cell: ({ row }) => <div className="capitalize table-text">{row.getValue("id")}</div>,
   },
   {
     accessorKey: "academic_level",
-    header: ()=> <h2 className="row-header">Academic Levels</h2>,
-    cell: ({ row }) => (
-      <div className="capitalize table-text">{row.getValue("academic_level")}</div>
-    ),
+    header: () => <h2 className="row-header">Academic Levels</h2>,
+    cell: ({ row }) => <div className="capitalize table-text">{row.getValue("academic_level")}</div>,
   },
   {
     accessorKey: "rate",
-    header: ({ column }) => {
-      return (
-        <button
-         className="row-header flex"
-        onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-        >
-          Rate
-          {column.getIsSorted() === "asc" ? <ArrowDown /> : <ArrowUp />}
-        </button>
-      )
-    },
+    header: ({ column }) => (
+      <button className="row-header flex" onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
+        Rate {column.getIsSorted() === "asc" ? <ArrowDown /> : <ArrowUp />}
+      </button>
+    ),
     cell: ({ row }) => <div className="table-text">{row.getValue("rate")}</div>,
   },
   {
     accessorKey: "date_created",
-    header: ()=> <h2 className="row-header">Date Created</h2>,
-    cell: ({ row }) => (
-      <div className="capitalize table-text">{row.getValue("date_created")}</div>
-    ),
+    header: () => <h2 className="row-header">Date Created</h2>,
+    cell: ({ row }) => <div className="capitalize table-text">{row.getValue("date_created")}</div>,
   },
   {
     accessorKey: "date_updated",
-    header: ()=> <h2 className="row-header">Date Updated</h2>,
-    cell: ({ row }) => (
-      <div className="capitalize table-text">{row.getValue("date_updated")}</div>
-    ),
+    header: () => <h2 className="row-header">Date Updated</h2>,
+    cell: ({ row }) => <div className="capitalize table-text">{row.getValue("date_updated")}</div>,
   },
- 
   {
     accessorKey: "actions",
     header: "",
     cell: () => (
       <div className="flex">
-      <ActionBtn action="Edit" />
-      <ActionBtn action="Delete" />
+        <ActionBtn action="Edit" />
+        <ActionBtn action="Delete" />
       </div>
     ),
   },
-  {
-    accessorKey: "langselect",
-    header: () => <LangSelect />,
-    
-  },
-  
-  
 ]
 
 export function SearchTable() {
-  // const {globalFilter} = useApp
   const [sorting, setSorting] = React.useState<SortingState>([])
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
-    []
-  )
-  const [columnVisibility, setColumnVisibility] =
-    React.useState<VisibilityState>({})
+  const [globalFilter, setGlobalFilter] = React.useState<string>("") // State for the global search term
+  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({})
   const [rowSelection, setRowSelection] = React.useState({})
 
   const table = useReactTable({
-    data:tableData,
+    data: tableData,
     columns,
     onSortingChange: setSorting,
-    onColumnFiltersChange: setColumnFilters,
-    getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
-    getSortedRowModel: getSortedRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
     state: {
       sorting,
-      columnFilters,
+      globalFilter, // Pass the global filter state to the table
       columnVisibility,
       rowSelection,
-      // globalFilter: globalFilter
+    },
+    getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
+    getSortedRowModel: getSortedRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
+    globalFilterFn: (row, columnId, filterValue) => {
+      // Implement filtering logic across multiple columns
+      const rowValue = row.getValue(columnId) as string;
+      if (rowValue == null) return false;
+      return rowValue.toString().toLowerCase().includes(filterValue.toLowerCase());
     },
   })
 
+  // Update global filter when the input changes
+  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setGlobalFilter(event.target.value);
+  }
+
   return (
     <div className="w-full">
-      <div className="md:absolute  md:top-[38%] md:right-[10%]">
-      <div className="h-10 border border-grey rounded-full w-full md:max-w-[318px] lg:w-[318px]">
-        <Input
-          placeholder="Search"
-          value={(table.getColumn("rate")?.getFilterValue() as string) ?? ""}
-          onChange={(event) =>
-            table.getColumn("rate")?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm"
-        />
+      <div className="md:absolute md:top-[38%] md:right-[10%]">
+        <div className="h-10 border border-grey rounded-full w-full md:max-w-[318px] lg:w-[318px]">
+          <Input
+            placeholder="Search Academic Level, Rate, Date"
+            value={globalFilter}
+            onChange={handleSearchChange}
+            className="max-w-sm"
+          />
+        </div>
       </div>
-      </div>
-      <div>
-        <Table>
-          <TableHeader className="bg-[#fefeff]  !rounded-2xl h-[72px]">
-            {table.getHeaderGroups().map((headerGroup) => (
-              <TableRow key={headerGroup.id}>
-                {headerGroup.headers.map((header) => {
-                  return (
-                    <TableHead key={header.id}>
-                      {header.isPlaceholder
-                        ? null
-                        : flexRender(
-                            header.column.columnDef.header,
-                            header.getContext()
-                          )}
-                    </TableHead>
-                  )
-                })}
+
+      <Table>
+        <TableHeader className="bg-[#fefeff] !rounded-2xl h-[72px]">
+          {table.getHeaderGroups().map((headerGroup) => (
+            <TableRow key={headerGroup.id}>
+              {headerGroup.headers.map((header) => (
+                <TableHead key={header.id}>
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(header.column.columnDef.header, header.getContext())}
+                </TableHead>
+              ))}
+            </TableRow>
+          ))}
+        </TableHeader>
+        <TableBody>
+          {table.getRowModel().rows?.length ? (
+            table.getRowModel().rows.map((row) => (
+              <TableRow key={row.id} data-state={row.getIsSelected() && "selected"}>
+                {row.getVisibleCells().map((cell) => (
+                  <TableCell key={cell.id}>
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </TableCell>
+                ))}
               </TableRow>
-            ))}
-          </TableHeader>
-          <TableBody>
-            {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
-            ) : (
-              <TableRow>
-                <TableCell
-                  colSpan={columns.length}
-                  className="h-24 text-center"
-                >
-                  No results.
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
-      </div>
+            ))
+          ) : (
+            <TableRow>
+              <TableCell colSpan={columns.length} className="h-24 text-center">
+                No results.
+              </TableCell>
+            </TableRow>
+          )}
+        </TableBody>
+      </Table>
+
+
+
       <div className="flex items-center justify-between mt-6 ">
         <Button
         icon ={addCircle}
@@ -243,7 +192,8 @@ export function SearchTable() {
               <circle cx="12" cy="12" r="10"/><path d="M8 12h8"/></svg>
           </button>
         </div>
+          
       </div>
-    </div>
-  )
-}
+        </div>
+      )
+  }
