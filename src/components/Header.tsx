@@ -30,7 +30,7 @@ export default function Header (){
             </button>
            <Logo />
            <div className="flex items-center justify-between gap-3">
-            <LangSelect className="hidden md:flex" />
+            <LangSelect className="hidden md:block" />
             <Avatar
              userName="Qataloog Admin"
              icon={avatarIcon}
@@ -38,7 +38,7 @@ export default function Header (){
              
            </div>
            {openSidebar && 
-           <div className="absolute top-0 py-5  bg-white right-0 left-0 z-50 ">
+           <div className="absolute top-0 py-5  bg-white right-0 left-0 h-screen z-50 ">
              <header className="flex justify-between items-center px-4">
                 <Logo 
                 />

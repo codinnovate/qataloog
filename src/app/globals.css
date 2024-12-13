@@ -42,3 +42,22 @@
   border-radius: 24px !important;
   border: none !important;
 }
+
+
+.ReactFlagsSelect-module_selectBtn__19wW7{
+  border-radius: 8px !important;
+}
+.ReactFlagsSelect-module_selectOptions__3LNBJ{
+  border-radius: 8px !important;
+}
+
+.ReactFlagsSelect-module_selectOptionValue__vS99-{
+  border-radius: 81px !important;
+}
+
+.ReactFlagsSelect-module_selectFlag__2q5gC svg {
+  width: 1.5em !important;
+  clip-path: circle() !important;
+  height: 1em !important;
+  object-fit: cover !important;
+}

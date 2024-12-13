@@ -13,7 +13,7 @@ import { TopHeader } from "@/components/TopHeader";
 
 
 export default  function Settings() {
-  const [currentTab, setCurrentTab] = useState(3);
+  const [currentTab, setCurrentTab] = useState(1);
 
   const handleTabChange = (id:number) => {
     setCurrentTab(id);
