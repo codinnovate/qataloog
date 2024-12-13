@@ -7,6 +7,7 @@ import LangSelect from "./LangSelect";
 import Logo from "./Logo";
 import { useState } from "react";
 import Sidebar from "./Sidebar";
+import { LangSwitcher } from "./LangSwitcher";
 
 
 
@@ -30,7 +31,7 @@ export default function Header (){
             </button>
            <Logo />
            <div className="flex items-center justify-between gap-3">
-            <LangSelect className="hidden md:block" />
+            <LangSwitcher className="hidden md:block" />
             <Avatar
              userName="Qataloog Admin"
              icon={avatarIcon}

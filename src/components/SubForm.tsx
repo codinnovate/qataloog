@@ -8,7 +8,15 @@ import CustomFormField from "@/components/CustomFormField";
 import Button from "@/components/Button";
 import { useState } from "react";
 import { subscriptionFormSchema } from "@/lib/validation";
-import { FormFieldType } from "@/app/(dashboard)/settings/_utils/_profile/ProfileInfo";
+
+
+
+
+
+export  enum FormFieldType {
+  INPUT = "input",
+  PHONE_INPUT = "phoneInput",
+}
 
 
 

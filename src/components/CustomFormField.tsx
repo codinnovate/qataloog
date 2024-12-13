@@ -4,7 +4,6 @@ import { FormControl, FormField, FormItem, FormLabel, FormMessage } from "./ui/f
 import { Input } from "./ui/input";
 import PhoneInput from "react-phone-number-input";
 import 'react-phone-number-input/style.css'
-import { FormFieldType } from "@/app/(dashboard)/settings/_utils/_profile/ProfileInfo";
 import { CustomProps } from "@/types/type";
 import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
@@ -13,6 +12,11 @@ import {
 	E164Number,
 } from 'libphonenumber-js/core';
 
+export  enum FormFieldType {
+    INPUT = "input",
+    PHONE_INPUT = "phoneInput",
+  }
+  
 
 
 const RenderField = ({ props, field }:{field:any, props: CustomProps }) => {

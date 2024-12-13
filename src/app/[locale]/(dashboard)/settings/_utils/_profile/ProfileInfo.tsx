@@ -11,14 +11,13 @@ import { userFormSchema } from "@/lib/validation";
 
 
 
+
+
+
 export  enum FormFieldType {
   INPUT = "input",
   PHONE_INPUT = "phoneInput",
 }
-
-
-
-
 
 
 export default function ProfileInfo() {

@@ -36,13 +36,22 @@
 .PhoneInputCountryIconImg{
   border-radius: 20px !important;
   object-fit: cover;
+  width: 1.7em !important;
+  clip-path: circle() !important;
+  height: 1.2em !important;
+  object-fit: cover !important;
 }
+
 
 .PhoneInputCountryIcon ,.PhoneInputCountryIcon--border{
   border-radius: 24px !important;
   border: none !important;
 }
 
+.PhoneInputCountryIcon--border{
+  box-shadow: none !important;
+  background-color: transparent !important;
+}
 
 .ReactFlagsSelect-module_selectBtn__19wW7{
   border-radius: 8px !important;

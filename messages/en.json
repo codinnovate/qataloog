@@ -1,0 +1,14 @@
+{
+  "TopHeader": {
+    "Dashboard": "Dashboard",
+    "Users": "Users",
+    "Admin": "Admin",
+    "Coupons": "Coupon Code",
+    "AcademicLevels": "Academic Levels",
+    "Platforms": "Platforms",
+    "Countries": "Countries",
+    "ContentType": "Content Type",
+    "Withdrawals": "Withdrawals",
+    "Settings": "Settings"
+  }
+}

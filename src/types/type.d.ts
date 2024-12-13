@@ -7,6 +7,12 @@ import { FormFieldType } from "@/app/(dashboard)/settings/_utils/Password";
 
 
 
+export  enum FormFieldType {
+    INPUT = "input",
+    PHONE_INPUT = "phoneInput",
+  }
+  
+  
 
 declare interface LinkItemsProps extends LinkProps {
     name: string;

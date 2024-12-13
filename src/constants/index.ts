@@ -34,7 +34,7 @@ export const sidebarItems = [
     },
     {
       name: "Coupon Codes",
-      href: "/coupon-codes",
+      href: "/coupons",
       icon: couponIcon,
     },
     {
